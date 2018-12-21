@@ -1,0 +1,26 @@
+{
+  "name": "potatos-system",
+  "version": "1.0.0",
+  "description": "Proyecto de SENA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevCamilo/Potatos-System-BackEnd.git"
+  },
+  "author": "Juan Camilo Reyes Romero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevCamilo/Potatos-System-BackEnd/issues"
+  },
+  "homepage": "https://github.com/DevCamilo/Potatos-System-BackEnd#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "moment": "^2.23.0",
+    "mongoose": "^5.4.0",
+    "nodemon": "^1.18.9"
+  }
+}
