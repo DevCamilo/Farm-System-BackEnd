@@ -9,7 +9,7 @@ const Client = Schema({
     lastName: String,
     telephone: String,
     document: String,
-    staus: { type: Boolean, default: true },
+    status: { type: Boolean, default: true },
     typeUser: Number
 });
 

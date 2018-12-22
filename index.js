@@ -8,7 +8,7 @@ const DB = require('./DB');
 // Parsear el body tipo JSON
 const bodyParser = require('body-parser');
 
-// Rutas AOI
+// Rutas API
 const ClientRoutes = require('./routes/clientRoute');
 
 // Conexión base de datos
@@ -23,6 +23,7 @@ mongoose.connect(`mongodb://${DB.user}:${DB.password}@${DB.hots}:${DB.port}/${DB
 app.use(bodyParser.json());
 app.use(ClientRoutes);
 
+// Se crea el servidor
 app.listen(3000, () => {
     console.log("Server Corriendo");
 });
