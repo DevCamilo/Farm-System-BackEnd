@@ -11,7 +11,8 @@ const Task = Schema({
     id_origin: { type: Schema.ObjectId, ref: 'clients' },
     id_receiver: { type: Schema.ObjectId, ref: 'clients' },
     status: { type: Boolean, default: true },
-    progress: { type: Number, default: 1 } 
+    progress: { type: Number, default: 1 } ,
+    timeLimit: Date
 });
 
 Task.plugin(timestamp, {
