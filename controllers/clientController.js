@@ -13,7 +13,7 @@ function createClient(req,res){
         password: req.body.password
     });
     ClientModel.find({userName: req.body.userName}, (err, data1) => {
-        if(data1){
+        if(data1.length > 0){
             res.status(500).send({status: false, error: 'El nombre de usuario ya existe'});
         } else {
             cliente.save((err, data2) => {
