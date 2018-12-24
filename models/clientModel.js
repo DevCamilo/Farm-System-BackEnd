@@ -10,7 +10,9 @@ const Client = Schema({
     telephone: String,
     document: String,
     status: { type: Boolean, default: true },
-    typeUser: Number
+    typeUser: Number,
+    userName: String,
+    password: String
 });
 
 Client.plugin(timestamp, {

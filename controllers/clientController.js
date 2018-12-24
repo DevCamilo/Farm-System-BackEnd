@@ -8,15 +8,24 @@ function createClient(req,res){
         lastName: req.body.lastName,
         telephone: req.body.telephone,
         document: req.body.document,
-        typeUser: req.body.typeUser
+        typeUser: req.body.typeUser,
+        userName: req.body.userName,
+        password: req.body.password
     });
-    cliente.save((err, data) => {
-        if(err){
-            res.status(500).send({status: false, error: 'Fallo al guardar los datos'});
+    ClientModel.find({userName: req.body.userName}, (err, data1) => {
+        if(data1){
+            res.status(500).send({status: false, error: 'El nombre de usuario ya existe'});
         } else {
-            res.status(200).send({status: true, data: data});
+            cliente.save((err, data2) => {
+                if(err){
+                    res.status(500).send({status: false, error: 'Fallo al guardar los datos'});
+                } else {
+                    res.status(200).send({status: true, data: data2});
+                }
+            });
         }
     });
+    
 }
 
 function listClient(req, res){

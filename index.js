@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 const ClientRoutes = require('./routes/clientRoute');
 
 // Conexión base de datos
-mongoose.connect(`mongodb://${DB.user}:${DB.password}@${DB.hots}:${DB.port}/${DB.database}`, (err, con) => {
+mongoose.connect(`mongodb://${DB.user}:${DB.password}@${DB.host}:${DB.port}/${DB.database}`, (err, con) => {
     if(err){
         console.log('Error en la conexión: ' + err);
     } else {
