@@ -9,14 +9,9 @@ const moment = require('moment');
  * @param {*} res 
  */
 function createtask(req, res) {
-    const task = new TaskModel({
-        title: req.body.title,
-        description: req.body.description,
-        priority: req.body.priority,
-        id_origin: req.body.id_origin,
-        id_receiver: req.body.id_receiver,
-        timeLimit: new Date(moment(req.body.finish).toISOString())
-    });
+    const query = req.body;
+    query.timeLimit = new Date(moment(req.body.finish).toISOString());
+    const task = new TaskModel(query);
     task.save((err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al guardar la tarea' });

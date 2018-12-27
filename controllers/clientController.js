@@ -9,15 +9,8 @@ const moment = require('moment');
  * @param {*} res 
  */
 function createClient(req, res) {
-    const client = new ClientModel({
-        name: req.body.name,
-        lastName: req.body.lastName,
-        telephone: req.body.telephone,
-        document: req.body.document,
-        typeUser: req.body.typeUser,
-        userName: req.body.userName,
-        password: req.body.password
-    });
+    const query = req.body;
+    const client = new ClientModel(query);
     // Verifica que el user name no exista
     ClientModel.find({ userName: req.body.userName }, (err, data1) => {
         if (data1.length > 0) {

@@ -1,13 +1,65 @@
 'use strict'
 
 const TaskController = require('../controllers/taskController');
+const { celebrate, Joi } = require('celebrate');
 const express = require('express');
 const api = express.Router();
 
-api.post('/create-task', TaskController.createtask);
-api.get('/list-task', TaskController.listTask);
-api.get('/list-task-id', TaskController.listTaskByID);
-api.get('/delete-task', TaskController.deleteTask);
-api.post('/update-task', TaskController.updateTask);
+api.post('/create-task', celebrate({
+    headers: Joi.object({
+        key: Joi.string().required()
+    }).unknown(),
+    body: Joi.object().keys({
+        title: Joi.string().required(),
+        description: Joi.string().required(),
+        priority: Joi.number().integer().required(),
+        id_origin: Joi.string().required(),
+        id_receiver: Joi.string().required(),
+        timeLimit: Joi.string().required()
+    }).unknown()
+}), (err, req, res, next) => {
+    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+}, TaskController.createtask);
+
+api.get('/list-task', celebrate({
+    headers: Joi.object({
+        key: Joi.string().required()
+    }).unknown()
+}), (err, req, res, next) => {
+    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+}, TaskController.listTask);
+
+api.get('/list-task-id', celebrate({
+    headers: Joi.object({
+        key: Joi.string().required(),
+        _id: Joi.string().required()
+    }).unknown()
+}), (err, req, res, next) => {
+    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+}, TaskController.listTaskByID);
+
+api.get('/delete-task', celebrate({
+    headers: Joi.object({
+        key: Joi.string().required(),
+        _id: Joi.string().required()
+    }).unknown()
+}), (err, req, res, next) => {
+    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+}, TaskController.deleteTask);
+
+api.post('/update-task', celebrate({
+    headers: Joi.object({
+        key: Joi.string().required(),
+        _id: Joi.string().required()
+    }).unknown(),
+    body: Joi.object().keys({
+        title: Joi.string(),
+        description: Joi.string(),
+        priority: Joi.number().integer(),
+        id_origin: Joi.string(),
+        id_receiver: Joi.string(),
+        timeLimit: Joi.string()
+    }).unknown()
+}), TaskController.updateTask);
 
 module.exports = api;
