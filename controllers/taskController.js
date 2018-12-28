@@ -2,6 +2,7 @@
 
 const TaskModel = require('../models/taskModel');
 const moment = require('moment');
+const mongoose = require('mongoose');
 
 /**
  * Crea una nueva tareas
@@ -9,7 +10,9 @@ const moment = require('moment');
  * @param {*} res 
  */
 function createtask(req, res) {
-    const query = req.body;
+    let query = req.body;
+    query.id_origin = mongoose.Types.ObjectId(req.headers.id_origin);
+    query.id_receiver = mongoose.Types.ObjectId(req.headers.id_receiver);
     query.timeLimit = new Date(moment(req.body.finish).toISOString());
     const task = new TaskModel(query);
     task.save((err, data) => {
@@ -42,19 +45,7 @@ function listTask(req, res) {
  * @param {*} res 
  */
 function listTaskByID(req, res) {
-    let _id;
-    if (req.headers.id_origin) {
-        _id = {
-            id_origin: req.headers.id_origin
-        };
-    } else if (req.headers.id_receiver) {
-        _id = {
-            id_receiver: req.headers.id_receiver
-        }
-    } else {
-        res.status(300).send({ status: false, error: 'El id no es valido' })
-    }
-    TaskModel.find(_id, (err, data) => {
+    TaskModel.findById(req.headers._id, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al listar la tarea' });
         } else {
@@ -64,12 +55,42 @@ function listTaskByID(req, res) {
 }
 
 /**
+ * Lista las tareas asiganadas por un usuario
+ * @param {*} req 
+ * @param {*} res 
+ */
+function listTaskByIdOrigin(req, res) {
+    TaskModel.find({ id_origin: mongoose.Types.ObjectId(req.headers.id_origin) }, (err, data) => {
+        if (err) {
+            res.status(500).send({ status: false, error: 'Fallo al listar la tarea' });
+        } else {
+            res.status(200).send({ status: true, data: data });
+        }
+    })
+}
+
+/**
+ * Lista las tareas que fueron asiganadas a un usuario
+ * @param {*} req 
+ * @param {*} res 
+ */
+function listTaskByIdReceiver(req, res){
+    TaskModel.find({ id_receiver : mongoose.Types.ObjectId(req.headers.id_receiver) }, (err, data) => {
+        if (err) {
+            res.status(500).send({ status: false, error: 'Fallo al listar la tarea' });
+        } else {
+            res.status(200).send({ status: true, data: data });
+        }
+    })
+}
+
+/**
  * Actualiza los campos de una tarea especifica
  * @param {*} req 
  * @param {*} res 
  */
 function updateTask(req, res) {
-    const query = req.body;
+    let query = req.body;
     query.updated_at = new Date(moment().toISOString());
     TaskModel.findOneAndUpdate({ _id: req.headers._id }, query, (err, data) => {
         if (err) {
@@ -102,6 +123,8 @@ module.exports = {
     createtask,
     listTask,
     listTaskByID,
+    listTaskByIdOrigin,
+    listTaskByIdReceiver,
     updateTask,
     deleteTask
 }

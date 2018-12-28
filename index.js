@@ -11,11 +11,12 @@ const bodyParser = require('body-parser');
 // Rutas API
 const ClientRoutes = require('./routes/clientRoute');
 const TaskRoutes = require('./routes/taskRoute');
+const CropRoutes = require('./routes/cropRoute');
 
 // Conexión base de datos
 mongoose.connect(`mongodb://${DB.user}:${DB.password}@${DB.host}:${DB.port}/${DB.database}`, { useNewUrlParser: true }, (err, con) => {
     if (err) {
-        console.log('Error en la conexión');
+        console.log('Error en la conexion');
     } else {
         console.log('Conexion DB Exitosa')
     }
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 // Lista de rutas
 app.use(ClientRoutes);
 app.use(TaskRoutes);
+app.use(CropRoutes);
 
 // Se crea el servidor
 app.listen(3000, () => {

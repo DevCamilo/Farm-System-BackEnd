@@ -64,7 +64,7 @@ function listClientByID(req, res) {
  * @param {*} res 
  */
 function updateClient(req, res) {
-    const query = req.body;
+    let query = req.body;
     query.created_at = new Date(moment().toISOString());
     ClientModel.findByIdAndUpdate(req.headers._id, query, (err, data) => {
         if (err) {

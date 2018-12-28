@@ -38,6 +38,24 @@ api.get('/list-task-id', celebrate({
     res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, TaskController.listTaskByID);
 
+api.get('/list-task-id_origin', celebrate({
+    headers: Joi.object({
+        key: Joi.string().required(),
+        id_origin: Joi.string().required()
+    }).unknown()
+}), (err, req, res, next) => {
+    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+}, TaskController.listTaskByIdOrigin);
+
+api.get('/list-task-id_receiver', celebrate({
+    headers: Joi.object({
+        key: Joi.string().required(),
+        id_receiver: Joi.string().required()
+    }).unknown()
+}), (err, req, res, next) => {
+    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+}, TaskController.listTaskByIdReceiver);
+
 api.get('/delete-task', celebrate({
     headers: Joi.object({
         key: Joi.string().required(),
