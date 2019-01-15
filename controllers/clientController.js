@@ -1,6 +1,6 @@
 'use strict'
 
-const ClientModel = require('../models/clientModel');
+const ClientModel = require('../models/ClientModel');
 const moment = require('moment');
 
 /**
@@ -49,7 +49,9 @@ function listClient(req, res) {
  * @param {*} res 
  */
 function listClientByID(req, res) {
-    ClientModel.findById(req.headers._id, (err, data) => {
+    console.log(req.query.id);
+    
+    ClientModel.findById(req.query.id, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al listar los datos' });
         } else {
@@ -66,7 +68,7 @@ function listClientByID(req, res) {
 function updateClient(req, res) {
     let query = req.body;
     query.created_at = new Date(moment().toISOString());
-    ClientModel.findByIdAndUpdate(req.headers._id, query, (err, data) => {
+    ClientModel.findByIdAndUpdate(req.query.id, query, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al listar los datos' });
         } else {
@@ -81,7 +83,7 @@ function updateClient(req, res) {
  * @param {*} res 
  */
 function deleteClient(req, res) {
-    ClientModel.findByIdAndUpdate(req.headers._id, {
+    ClientModel.findByIdAndUpdate(req.query.id, {
         status: false,
         created_at: new Date(moment().toISOString())
     }, (err, data) => {

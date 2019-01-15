@@ -1,6 +1,6 @@
 'use strict'
 
-const CropModel = require('../models/cropModel');
+const CropModel = require('../models/CropModel');
 const moment = require('moment');
 
 /**
@@ -41,7 +41,7 @@ function listCrop(req, res) {
  * @param {*} res 
  */
 function listCropById(req, res) {
-    CropModel.findById(req.headers._id, (err, data) => {
+    CropModel.findById(req.query.id, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al listar el cultivo' });
         } else {
@@ -58,7 +58,7 @@ function listCropById(req, res) {
 function updateCrop(req, res) {
     let query;
     query.updated_at = new Date(moment().toISOString());
-    CropModel.findByIdAndUpdate(req.headers._id, (err, data) => {
+    CropModel.findByIdAndUpdate(req.query.id, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al actuaizar el cultivo' });
         } else {
@@ -73,7 +73,7 @@ function updateCrop(req, res) {
  * @param {*} res 
  */
 function deleteCrop(req, res) {
-    CropModel.findByIdAndUpdate(req.headers._id, {
+    CropModel.findByIdAndUpdate(req.query.id, {
         status: false,
         updated_at: new Date(moment().toISOString())
     }, (err, data) => {

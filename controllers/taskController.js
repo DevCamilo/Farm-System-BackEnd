@@ -1,6 +1,6 @@
 'use strict'
 
-const TaskModel = require('../models/taskModel');
+const TaskModel = require('../models/TaskModel');
 const moment = require('moment');
 const mongoose = require('mongoose');
 
@@ -45,7 +45,7 @@ function listTask(req, res) {
  * @param {*} res 
  */
 function listTaskByID(req, res) {
-    TaskModel.findById(req.headers._id, (err, data) => {
+    TaskModel.findById(req.query.id, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al listar la tarea' });
         } else {
@@ -60,7 +60,7 @@ function listTaskByID(req, res) {
  * @param {*} res 
  */
 function listTaskByIdOrigin(req, res) {
-    TaskModel.find({ id_origin: mongoose.Types.ObjectId(req.headers.id_origin) }, (err, data) => {
+    TaskModel.find({ id_origin: mongoose.Types.ObjectId(req.query.id) }, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al listar la tarea' });
         } else {
@@ -74,8 +74,8 @@ function listTaskByIdOrigin(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-function listTaskByIdReceiver(req, res){
-    TaskModel.find({ id_receiver : mongoose.Types.ObjectId(req.headers.id_receiver) }, (err, data) => {
+function listTaskByIdReceiver(req, res) {
+    TaskModel.find({ id_receiver: mongoose.Types.ObjectId(req.query.id) }, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al listar la tarea' });
         } else {
@@ -92,7 +92,7 @@ function listTaskByIdReceiver(req, res){
 function updateTask(req, res) {
     let query = req.body;
     query.updated_at = new Date(moment().toISOString());
-    TaskModel.findOneAndUpdate({ _id: req.headers._id }, query, (err, data) => {
+    TaskModel.findOneAndUpdate(req.query.id, query, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al actualizar la tarea' });
         } else {
@@ -107,7 +107,7 @@ function updateTask(req, res) {
  * @param {*} res 
  */
 function deleteTask(req, res) {
-    TaskModel.findByIdAndUpdate({ _id: req.headers }, {
+    TaskModel.findByIdAndUpdate(req.query.id, {
         status: false,
         updated_at: new Date(moment().toISOString())
     }, (err, data) => {
