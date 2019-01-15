@@ -2,7 +2,6 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const timestamp = require('mongoose-timestamp-plugin');
 
 const Crop = Schema({
     name: String,
@@ -12,13 +11,6 @@ const Crop = Schema({
     pests: String,
     comment: String,
     status: { type: Boolean, default: true}
-});
-
-Crop.plugin(timestamp, {
-    createdName: 'created_at',
-    updatedName: 'updated_at',
-    disableCreated: false,
-    disableUpdated: false
-});
+}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }, versionKey: false });
 
 module.exports = mongoose.model('crop', Crop);
