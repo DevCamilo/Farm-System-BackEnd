@@ -10,8 +10,8 @@ const DB = require('./DB');
 const bodyParser = require('body-parser');
 // Rutas API
 const ClientRoutes = require('./routes/ClientRouter');
-const TaskRoutes = require('./routes/taskRouter');
-const CropRoutes = require('./routes/cropRouter');
+const TaskRoutes = require('./routes/TaskRouter');
+const CropRoutes = require('./routes/CropRouter');
 
 // Conexión base de datos
 mongoose.connect(`mongodb://${DB.user}:${DB.password}@${DB.host}:${DB.port}/${DB.database}`, { useNewUrlParser: true }, (err, con) => {
