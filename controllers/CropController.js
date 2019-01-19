@@ -10,12 +10,11 @@ const moment = require('moment');
  */
 function createCrop(req, res) {
     const query = req.body;
-    const crop = new CropModel(query);
-    crop.save((err, data) => {
+    CropModel.create(query, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al guardar el cultivo' });
         } else {
-            res.status(200).send({ status: true, data: data });
+            res.status(200).send({ status: true, message: 'Cultivo creado exitosamente' });
         }
     });
 }
@@ -56,9 +55,9 @@ function listCropById(req, res) {
  * @param {*} res 
  */
 function updateCrop(req, res) {
-    let query;
-    query.updated_at = new Date(moment().toISOString());
-    CropModel.findByIdAndUpdate(req.query.id, (err, data) => {
+    let update = req.body;
+    update.updated_at = new Date(moment().toISOString());
+    CropModel.findByIdAndUpdate(update.id, update, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al actuaizar el cultivo' });
         } else {

@@ -29,11 +29,9 @@ api.get('/list-client-id/:id?', celebrate({
     res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, ClientController.listClientByID);
 
-api.post('/update-client/:id?', celebrate({
-    query: Joi.object({
-        id: Joi.string().required()
-    }).unknown(),
+api.put('/update-client', celebrate({
     body: Joi.object().keys({
+        id: Joi.string().required(),
         name: Joi.string(),
         lastName: Joi.string(),
         telephone: Joi.string(),
@@ -44,7 +42,7 @@ api.post('/update-client/:id?', celebrate({
     res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, ClientController.updateClient);
 
-api.get('/delete-client/:id?', celebrate({
+api.delete('/delete-client/:id?', celebrate({
     query: Joi.object({
         id: Joi.string().required()
     }).unknown()

@@ -11,15 +11,11 @@ const mongoose = require('mongoose');
  */
 function createtask(req, res) {
     let query = req.body;
-    query.id_origin = mongoose.Types.ObjectId(req.headers.id_origin);
-    query.id_receiver = mongoose.Types.ObjectId(req.headers.id_receiver);
-    query.timeLimit = new Date(moment(req.body.finish).toISOString());
-    const task = new TaskModel(query);
-    task.save((err, data) => {
+    TaskModel.create(query, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al guardar la tarea' });
         } else {
-            res.status(200).send({ status: true, data: data });
+            res.status(200).send({ status: true, message: 'Creación exitosa' });
         }
     });
 }
@@ -90,13 +86,13 @@ function listTaskByIdReceiver(req, res) {
  * @param {*} res 
  */
 function updateTask(req, res) {
-    let query = req.body;
-    query.updated_at = new Date(moment().toISOString());
-    TaskModel.findOneAndUpdate(req.query.id, query, (err, data) => {
+    let update = req.body;
+    update.updated_at = new Date(moment().toISOString());
+    TaskModel.findOneAndUpdate(update.id, update, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al actualizar la tarea' });
         } else {
-            res.status(200).send({ status: true, data: data });
+            res.status(200).send({ status: true, message: 'Actualización exitosa' });
         }
     })
 }
@@ -114,7 +110,7 @@ function deleteTask(req, res) {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al eliminar la tarea' });
         } else {
-            res.status(200).send({ status: true, data: data });
+            res.status(200).send({ status: true, message: 'Eliminación exitosa' });
         }
     });
 }

@@ -10,17 +10,16 @@ const moment = require('moment');
  */
 function createClient(req, res) {
     const query = req.body;
-    const client = new ClientModel(query);
     // Verifica que el user name no exista
-    ClientModel.find({ userName: req.body.userName }, (err, data1) => {
+    ClientModel.find({ userName: query.userName }, (err2, data1) => {
         if (data1.length > 0) {
             res.status(500).send({ status: false, error: 'El nombre de usuario ya existe' });
         } else {
-            client.save((err, data2) => {
-                if (err) {
+            ClientModel.create(query, (err2, data2) => {
+                if (err2) {
                     res.status(500).send({ status: false, error: 'Fallo al guardar los datos' });
                 } else {
-                    res.status(200).send({ status: true, data: data2 });
+                    res.status(200).send({ status: true, message: 'Usuario creado exitósamente' });
                 }
             });
         }
@@ -49,8 +48,6 @@ function listClient(req, res) {
  * @param {*} res 
  */
 function listClientByID(req, res) {
-    console.log(req.query.id);
-    
     ClientModel.findById(req.query.id, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al listar los datos' });
@@ -66,13 +63,13 @@ function listClientByID(req, res) {
  * @param {*} res 
  */
 function updateClient(req, res) {
-    let query = req.body;
-    query.created_at = new Date(moment().toISOString());
-    ClientModel.findByIdAndUpdate(req.query.id, query, (err, data) => {
+    let update = req.body;
+    update.updated_at = new Date(moment().toISOString());
+    ClientModel.findByIdAndUpdate(update.id, update, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al listar los datos' });
+            res.status(500).send({ status: false, error: 'Fallo al actualizar los datos' });
         } else {
-            res.status(200).send({ status: true, data: data });
+            res.status(200).send({ status: true, message: 'Actualizado exitosamente' });
         }
     });
 }
@@ -85,12 +82,12 @@ function updateClient(req, res) {
 function deleteClient(req, res) {
     ClientModel.findByIdAndUpdate(req.query.id, {
         status: false,
-        created_at: new Date(moment().toISOString())
+        updated_at: new Date(moment().toISOString())
     }, (err, data) => {
         if (err) {
             res.status(500).send({ status: false, error: 'Fallo al listar los datos' });
         } else {
-            res.status(200).send({ status: true, data: data });
+            res.status(200).send({ status: true, message: 'Eliminado correctamente' });
         }
     });
 }

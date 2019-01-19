@@ -28,11 +28,9 @@ api.get('/list-crop-id/:id?', celebrate({
     res.status(300).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
 }, CropController.listCropById);
 
-api.post('/update-crop/:id?', celebrate({
-    query: Joi.object({
-        id: Joi.string().required()
-    }).unknown(),
+api.put('/update-crop', celebrate({
     body: Joi.object().keys({
+        id: Joi.string().required(),
         name: Joi.string(),
         description: Joi.string(),
         responsable: Joi.string(),
@@ -44,7 +42,7 @@ api.post('/update-crop/:id?', celebrate({
     res.status(300).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
 }, CropController.updateCrop);
 
-api.get('/delete-crop/:id?', celebrate({
+api.delete('/delete-crop/:id?', celebrate({
     query: Joi.object({
         id: Joi.string().required()
     }).unknown()
