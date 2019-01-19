@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const ClientRoutes = require('./routes/ClientRouter');
 const TaskRoutes = require('./routes/TaskRouter');
 const CropRoutes = require('./routes/CropRouter');
+const LoginRoutes = require('./routes/LoginRouter');
 
 // Conexión base de datos
 mongoose.connect(`mongodb://${DB.user}:${DB.password}@${DB.host}:${DB.port}/${DB.database}`, { useNewUrlParser: true }, (err, con) => {
@@ -30,6 +31,7 @@ app.use(cors());
 app.use(ClientRoutes);
 app.use(TaskRoutes);
 app.use(CropRoutes);
+app.use(LoginRoutes);
 
 // Se crea el servidor
 app.listen(3000, () => {

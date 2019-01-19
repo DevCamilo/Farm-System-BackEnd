@@ -4,8 +4,9 @@ const express = require('express');
 const { celebrate, Joi } = require('celebrate');
 const api = express.Router();
 const CropController = require('../controllers/CropController');
+const Auth = require('../middlewares/auth');
 
-api.post('/create-crop', celebrate({
+api.post('/create-crop', Auth.isAuth, celebrate({
     body: Joi.object().keys({
         name: Joi.string().required(),
         description: Joi.string().required(),
