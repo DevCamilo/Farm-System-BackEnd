@@ -15,12 +15,12 @@ function createToken(id) {
 
 function isAuth(req, res, next) {
     if (!req.headers.authorization) {
-        return res.status(403).send({ status: false, message: 'Se requiere autenticación' });
+        return res.status(200).send({ status: false, message: 'Se requiere autenticación' });
     }
     const token = req.headers.authorization.split(" ")[1];
     const payload = jwt.decode(token, secret, { noVerify: true });
     if (payload.exp <= moment().unix()) {
-        return res.status(403).send({ status: false, message: 'El token ha expirado' });
+        return res.status(200).send({ status: false, message: 'El token ha expirado' });
     }
     return next()
 }
