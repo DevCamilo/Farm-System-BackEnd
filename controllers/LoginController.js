@@ -5,7 +5,6 @@ const token = require('../middlewares/auth');
 
 function login(req, res) {
     let query = req.body;
-    console.log(req.body);
     ClienModel.find({ userName: query.userName }, (err, data) => {
         if (err) {
             res.status(200).send({ status: false, error: 'Fallo al buscar el usuario' })
@@ -16,7 +15,7 @@ function login(req, res) {
                 if (err) {
                     res.status(200).send({ status: false, error: 'Fallo al buscar la contraseña' });
                 } else if (data2.length == 0) {
-                    res.status(200).send({ status: false, message: 'Contraseña es incorrecta' });
+                    res.status(200).send({ status: false, message: 'Contraseña incorrecta' });
                 } else {
                     res.status(200).send({ status: true, data: data2, token: token.createToken(data2._id) });
                 }
