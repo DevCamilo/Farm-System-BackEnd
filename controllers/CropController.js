@@ -12,7 +12,7 @@ function createCrop(req, res) {
     const query = req.body;
     CropModel.create(query, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al guardar el cultivo' });
+            res.status(200).send({ status: false, error: 'Fallo al guardar el cultivo' });
         } else {
             res.status(200).send({ status: true, message: 'Cultivo creado exitosamente' });
         }
@@ -27,7 +27,7 @@ function createCrop(req, res) {
 function listCrop(req, res) {
     CropModel.find({ status: true }, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al listar los cultivos' });
+            res.status(200).send({ status: false, error: 'Fallo al listar los cultivos' });
         } else {
             res.status(200).send({ status: true, data: data });
         }
@@ -42,7 +42,7 @@ function listCrop(req, res) {
 function listCropById(req, res) {
     CropModel.findById(req.query.id, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al listar el cultivo' });
+            res.status(200).send({ status: false, error: 'Fallo al listar el cultivo' });
         } else {
             res.status(200).send({ status: true, data: data });
         }
@@ -59,7 +59,7 @@ function updateCrop(req, res) {
     update.updated_at = new Date(moment().toISOString());
     CropModel.findByIdAndUpdate(update.id, update, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al actuaizar el cultivo' });
+            res.status(200).send({ status: false, error: 'Fallo al actuaizar el cultivo' });
         } else {
             res.status(200).send({ status: true, data: data });
         }
@@ -77,7 +77,7 @@ function deleteCrop(req, res) {
         updated_at: new Date(moment().toISOString())
     }, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al eliminar el cultivo' });
+            res.status(200).send({ status: false, error: 'Fallo al eliminar el cultivo' });
         } else {
             res.status(200).send({ status: true, data: data });
         }

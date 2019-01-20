@@ -15,7 +15,7 @@ api.post('/create-task', celebrate({
         timeLimit: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+    res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, TaskController.createtask);
 
 api.get('/list-task', TaskController.listTask);
@@ -25,7 +25,7 @@ api.get('/list-task-id/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+    res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, TaskController.listTaskByID);
 
 api.get('/list-task-id-origin/:id?', celebrate({
@@ -33,7 +33,7 @@ api.get('/list-task-id-origin/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+    res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, TaskController.listTaskByIdOrigin);
 
 api.get('/list-task-id-receiver/:id?', celebrate({
@@ -41,7 +41,7 @@ api.get('/list-task-id-receiver/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+    res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, TaskController.listTaskByIdReceiver);
 
 api.delete('/delete-task/:id?', celebrate({
@@ -49,7 +49,7 @@ api.delete('/delete-task/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+    res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, TaskController.deleteTask);
 
 api.put('/update-task', celebrate({

@@ -16,7 +16,7 @@ api.post('/create-client', celebrate({
         password: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+    res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, ClientController.createClient);
 
 api.get('/list-client', ClientController.listClient);
@@ -26,7 +26,7 @@ api.get('/list-client-id/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+    res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, ClientController.listClientByID);
 
 api.put('/update-client', celebrate({
@@ -39,7 +39,7 @@ api.put('/update-client', celebrate({
         typeUser: Joi.number().integer()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+    res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, ClientController.updateClient);
 
 api.delete('/delete-client/:id?', celebrate({
@@ -47,7 +47,7 @@ api.delete('/delete-client/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
+    res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, ClientController.deleteClient);
 
 module.exports = api;

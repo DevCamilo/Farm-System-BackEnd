@@ -16,7 +16,9 @@ api.post('/create-crop', Auth.isAuth, celebrate({
         comment: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+    console.log(err);
+    
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
 }, CropController.createCrop);
 
 api.get('/list-crop', CropController.listCrop);
@@ -26,7 +28,7 @@ api.get('/list-crop-id/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
 }, CropController.listCropById);
 
 api.put('/update-crop', celebrate({
@@ -40,7 +42,7 @@ api.put('/update-crop', celebrate({
         comment: Joi.string()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
 }, CropController.updateCrop);
 
 api.delete('/delete-crop/:id?', celebrate({
@@ -48,7 +50,7 @@ api.delete('/delete-crop/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(300).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
 }, CropController.updateCrop);
 
 module.exports = api;

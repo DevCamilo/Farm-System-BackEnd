@@ -13,11 +13,11 @@ function createClient(req, res) {
     // Verifica que el user name no exista
     ClientModel.find({ userName: query.userName }, (err2, data1) => {
         if (data1.length > 0) {
-            res.status(500).send({ status: false, error: 'El nombre de usuario ya existe' });
+            res.status(200).send({ status: false, error: 'El nombre de usuario ya existe' });
         } else {
             ClientModel.create(query, (err2, data2) => {
                 if (err2) {
-                    res.status(500).send({ status: false, error: 'Fallo al guardar los datos' });
+                    res.status(200).send({ status: false, error: 'Fallo al guardar los datos' });
                 } else {
                     res.status(200).send({ status: true, message: 'Usuario creado exitósamente' });
                 }
@@ -35,7 +35,7 @@ function createClient(req, res) {
 function listClient(req, res) {
     ClientModel.find({ status: true }, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al listar los datos' });
+            res.status(200).send({ status: false, error: 'Fallo al listar los datos' });
         } else {
             res.status(200).send({ status: true, data: data });
         }
@@ -50,7 +50,7 @@ function listClient(req, res) {
 function listClientByID(req, res) {
     ClientModel.findById(req.query.id, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al listar los datos' });
+            res.status(200).send({ status: false, error: 'Fallo al listar los datos' });
         } else {
             res.status(200).send({ status: true, data: data });
         }
@@ -67,7 +67,7 @@ function updateClient(req, res) {
     update.updated_at = new Date(moment().toISOString());
     ClientModel.findByIdAndUpdate(update.id, update, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al actualizar los datos' });
+            res.status(200).send({ status: false, error: 'Fallo al actualizar los datos' });
         } else {
             res.status(200).send({ status: true, message: 'Actualizado exitosamente' });
         }
@@ -85,7 +85,7 @@ function deleteClient(req, res) {
         updated_at: new Date(moment().toISOString())
     }, (err, data) => {
         if (err) {
-            res.status(500).send({ status: false, error: 'Fallo al listar los datos' });
+            res.status(200).send({ status: false, error: 'Fallo al listar los datos' });
         } else {
             res.status(200).send({ status: true, message: 'Eliminado correctamente' });
         }
