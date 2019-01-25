@@ -53,4 +53,12 @@ api.delete('/delete-crop/:id?', celebrate({
     res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
 }, CropController.updateCrop);
 
+api.get('/list-crop-responsable/:id?', celebrate({
+    query: Joi.object({
+        id: Joi.string().required()
+    }).unknown()
+}), (err, req, res, next) => {
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+}, CropController.listCropByResponsable);
+
 module.exports = api;

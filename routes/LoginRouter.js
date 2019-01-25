@@ -11,7 +11,6 @@ api.post('/login', celebrate({
         password: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    console.log(err);
     res.status(200).send({status: false, message: 'Faltan datos por enviar o no son correctos'});
 }, LoginController.login);
 

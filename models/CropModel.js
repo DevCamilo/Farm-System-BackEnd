@@ -7,7 +7,7 @@ const Crop = Schema({
     name: String,
     description: String,
     responsable: { type: Schema.ObjectId, ref: 'clients' },
-    employees: [],
+    employees: [{ type: Schema.ObjectId, ref: 'clients' }],
     pests: String,
     comment: String,
     status: { type: Boolean, default: true}

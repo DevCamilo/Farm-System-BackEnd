@@ -84,10 +84,21 @@ function deleteCrop(req, res) {
     });
 }
 
+function listCropByResponsable(req, res) {
+    CropModel.find({ responsable: req.query.id }, (err, data) => {
+        if (err) {
+            res.status(200).send({ status: false, error: 'Fallo al listar los datos' });
+        } else {
+            res.status(200).send({ status: true, data: data });
+        }
+    });
+}
+
 module.exports = {
     createCrop,
     listCrop,
     listCropById,
     updateCrop,
-    deleteCrop
+    deleteCrop,
+    listCropByResponsable
 }
