@@ -10,7 +10,7 @@ function createToken(id) {
         iat: moment().unix(),
         exp: moment().add(30, 'minutes').unix()
     }
-    return jwt.encode(payload, secret);
+    return jwt.encode(payload, secret, 'HS256');
 }
 
 function isAuth(req, res, next) {
@@ -18,7 +18,11 @@ function isAuth(req, res, next) {
         return res.status(200).send({ status: false, message: 'Se requiere autenticación' });
     }
     const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.decode(token, secret, { noVerify: true });
+    var segments = token.split('.');
+    if (segments.length !== 3) {
+        return res.status(200).send({ status: false, message: 'El token no es valido' })
+    }
+    const payload = jwt.decode(token, secret, true, 'HS256');
     if (payload.exp <= moment().unix()) {
         return res.status(200).send({ status: false, message: 'El token ha expirado' });
     }

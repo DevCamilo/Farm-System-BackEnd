@@ -16,9 +16,7 @@ api.post('/create-crop', Auth.isAuth, celebrate({
         comment: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    console.log(err);
-    
-    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar' });
 }, CropController.createCrop);
 
 api.get('/list-crop', CropController.listCrop);
@@ -28,7 +26,7 @@ api.get('/list-crop-id/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar' });
 }, CropController.listCropById);
 
 api.put('/update-crop', celebrate({
@@ -42,7 +40,7 @@ api.put('/update-crop', celebrate({
         comment: Joi.string()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar' });
 }, CropController.updateCrop);
 
 api.delete('/delete-crop/:id?', celebrate({
@@ -50,7 +48,7 @@ api.delete('/delete-crop/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar' });
 }, CropController.updateCrop);
 
 api.get('/list-crop-responsable/:id?', celebrate({
@@ -58,7 +56,7 @@ api.get('/list-crop-responsable/:id?', celebrate({
         id: Joi.string().required()
     }).unknown()
 }), (err, req, res, next) => {
-    res.status(200).send({ status: false, message: 'Faltan datos por enviar o no son correctos' });
+    res.status(200).send({ status: false, message: 'Faltan datos por enviar' });
 }, CropController.listCropByResponsable);
 
 module.exports = api;

@@ -17,7 +17,7 @@ function login(req, res) {
                 } else if (data2.length == 0) {
                     res.status(200).send({ status: false, message: 'Contraseña incorrecta' });
                 } else {
-                    res.status(200).send({ status: true, data: data2, token: token.createToken(data2._id) });
+                    res.status(200).send({ status: true, data: data2, token: token.createToken(data2[0]._id) });
                 }
             });
         }
