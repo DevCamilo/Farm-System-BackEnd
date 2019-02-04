@@ -33,7 +33,7 @@ function createClient(req, res) {
  * @param {*} res 
  */
 function listClient(req, res) {
-    ClientModel.find({ status: true }, (err, data) => {
+    ClientModel.find({ status: true }).sort({ created_at: -1 }).exec((err, data) => {
         if (err) {
             res.status(200).send({ status: false, error: 'Fallo al listar los datos' });
         } else {

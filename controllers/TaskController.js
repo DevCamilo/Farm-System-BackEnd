@@ -26,7 +26,7 @@ function createtask(req, res) {
  * @param {*} res 
  */
 function listTask(req, res) {
-    TaskModel.find({ status: true }, (err, data) => {
+    TaskModel.find({ status: true }).sort({ created_at: -1 }).exec((err, data) => {
         if (err) {
             res.status(200).send({ status: false, error: 'Fallo al listar las tareas' });
         } else {
