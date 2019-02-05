@@ -15,6 +15,9 @@ const CropRoutes = require('./routes/CropRouter');
 const LoginRoutes = require('./routes/LoginRouter');
 
 // Conexión base de datos
+// En mongoLab
+//mongoose.connect(`mongodb://${DB.user}:${DB.password}@${DB.host}:${DB.port}/${DB.database}`, { useNewUrlParser: true }, (err, con) => {
+// Local
 mongoose.connect(`mongodb://${DB.host}:${DB.port}/${DB.database}`, { useNewUrlParser: true }, (err, con) => {
     if (err) {
         console.log('Error en la conexion');
