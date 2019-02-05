@@ -25,7 +25,7 @@ function createCrop(req, res) {
  * @param {*} res 
  */
 function listCrop(req, res) {
-    CropModel.find({ status: true }).sort({ created_at: -1 }).exec((err, data) => {
+    CropModel.find({ status: true }).sort({ created_at: -1 }).populate('employees', 'name').populate('responsable', 'name').exec((err, data) => {
         if (err) {
             res.status(200).send({ status: false, error: 'Fallo al listar los cultivos' });
         } else {
@@ -85,7 +85,7 @@ function deleteCrop(req, res) {
 }
 
 function listCropByResponsable(req, res) {
-    CropModel.find({ responsable: req.query.id }).sort({ created_at: -1 }).exec((err, data) => {
+    CropModel.find({ responsable: req.query.id }).sort({ created_at: -1 }).populate('employees', 'name').exec((err, data) => {
         if (err) {
             res.status(200).send({ status: false, error: 'Fallo al listar los datos' });
         } else {

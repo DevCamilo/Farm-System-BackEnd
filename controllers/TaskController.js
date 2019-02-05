@@ -13,7 +13,7 @@ function createtask(req, res) {
     let query = req.body;
     TaskModel.create(query, (err, data) => {
         if (err) {
-            res.status(200).send({ status: false, error: 'Fallo al guardar la tarea' });
+            res.status(200).send({ status: false, message: 'Fallo al guardar la tarea' });
         } else {
             res.status(200).send({ status: true, message: 'Creación exitosa' });
         }
@@ -28,7 +28,7 @@ function createtask(req, res) {
 function listTask(req, res) {
     TaskModel.find({ status: true }).sort({ created_at: -1 }).exec((err, data) => {
         if (err) {
-            res.status(200).send({ status: false, error: 'Fallo al listar las tareas' });
+            res.status(200).send({ status: false, message: 'Fallo al listar las tareas' });
         } else {
             res.status(200).send({ status: true, data: data });
         }
@@ -43,7 +43,7 @@ function listTask(req, res) {
 function listTaskByID(req, res) {
     TaskModel.findById(req.query.id, (err, data) => {
         if (err) {
-            res.status(200).send({ status: false, error: 'Fallo al listar la tarea' });
+            res.status(200).send({ status: false, message: 'Fallo al listar la tarea' });
         } else {
             res.status(200).send({ status: true, data: data });
         }
@@ -58,7 +58,7 @@ function listTaskByID(req, res) {
 function listTaskByIdOrigin(req, res) {
     TaskModel.find({ id_origin: mongoose.Types.ObjectId(req.query.id) }, (err, data) => {
         if (err) {
-            res.status(200).send({ status: false, error: 'Fallo al listar la tarea' });
+            res.status(200).send({ status: false, message: 'Fallo al listar la tarea' });
         } else {
             res.status(200).send({ status: true, data: data });
         }
@@ -73,7 +73,7 @@ function listTaskByIdOrigin(req, res) {
 function listTaskByIdReceiver(req, res) {
     TaskModel.find({ id_receiver: mongoose.Types.ObjectId(req.query.id) }, (err, data) => {
         if (err) {
-            res.status(200).send({ status: false, error: 'Fallo al listar la tarea' });
+            res.status(200).send({ status: false, message: 'Fallo al listar la tarea' });
         } else {
             res.status(200).send({ status: true, data: data });
         }
@@ -90,7 +90,7 @@ function updateTask(req, res) {
     update.updated_at = new Date(moment().toISOString());
     TaskModel.findOneAndUpdate(update.id, update, (err, data) => {
         if (err) {
-            res.status(200).send({ status: false, error: 'Fallo al actualizar la tarea' });
+            res.status(200).send({ status: false, message: 'Fallo al actualizar la tarea' });
         } else {
             res.status(200).send({ status: true, message: 'Actualización exitosa' });
         }
@@ -108,7 +108,7 @@ function deleteTask(req, res) {
         updated_at: new Date(moment().toISOString())
     }, (err, data) => {
         if (err) {
-            res.status(200).send({ status: false, error: 'Fallo al eliminar la tarea' });
+            res.status(200).send({ status: false, message: 'Fallo al eliminar la tarea' });
         } else {
             res.status(200).send({ status: true, message: 'Eliminación exitosa' });
         }
