@@ -4,8 +4,10 @@ const ClientController = require('../controllers/ClientController');
 const { celebrate, Joi } = require('celebrate');
 const express = require('express');
 const api = express.Router();
+const Auth = require('../middlewares/auth');
 
-api.post('/create-client', celebrate({
+
+api.post('/create-client', Auth.isAuth, celebrate({
     body: Joi.object().keys({
         name: Joi.string().required(),
         lastName: Joi.string().required(),

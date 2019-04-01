@@ -13,6 +13,7 @@ const ClientRoutes = require('./routes/ClientRouter');
 const TaskRoutes = require('./routes/TaskRouter');
 const CropRoutes = require('./routes/CropRouter');
 const LoginRoutes = require('./routes/LoginRouter');
+const TypeCropRoutes = require('./routes/TypeCropRouter');
 
 // Conexión base de datos
 // En mongoLab
@@ -35,6 +36,7 @@ app.use(ClientRoutes);
 app.use(TaskRoutes);
 app.use(CropRoutes);
 app.use(LoginRoutes);
+app.use(TypeCropRoutes);
 
 // Se crea el servidor
 app.listen(3000, () => {

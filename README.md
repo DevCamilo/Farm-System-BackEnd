@@ -1,9 +1,9 @@
-# Farm System BackEnd
+# ADDMIN BackEnd
 
 ## Instalación
 ```
-> git clone https://github.com/DevCamilo/Farm-System-BackEnd.git
-> cd Farm-System-BackEnd
+> git clone https://github.com/DevCamilo/ADDMIN-BackEnd.git
+> cd ADDMIN-BackEnd
 > npm install
 ```
 
